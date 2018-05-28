@@ -1,0 +1,9 @@
+printWidth: 120
+tabWidth: 4
+bracketSpacing: false
+
+# JSON
+overrides:
+- files: "*.json"
+  options:
+    tabWidth: 2

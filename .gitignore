@@ -1,0 +1,13 @@
+build
+node_modules
+.idea
+logs
+coverage
+.nyc_output
+.DS_Store
+*.log
+secrets
+
+# Visual Studio Code
+.vscode/*
+!.vscode/launch.json

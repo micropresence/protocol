@@ -37,7 +37,7 @@ export class WebSocketMessenger {
         const responsePromise = this.nextByDialog(dialogId);
         await this.send(channel, messageType, request, dialogId);
         const response = await responsePromise;
-        if (!WebSocketMessenger.isDialogWrapper(response)) {
+        if (!WebSocketMessenger.isWrappedMessage(response)) {
             throw new Error("Received response was not wrapped correctly");
         }
         return response;
@@ -67,7 +67,7 @@ export class WebSocketMessenger {
         return `channel:${channel}`;
     }
 
-    private static isDialogWrapper(candidate: any): candidate is WrappedMessage {
+    private static isWrappedMessage(candidate: any): candidate is WrappedMessage {
         return (
             candidate !== null &&
             typeof candidate === "object" &&
@@ -78,8 +78,8 @@ export class WebSocketMessenger {
 
     private initMessageEmitting(): void {
         this.ws.on("message", data => {
-            const wrappedMessage = parseJsonSafely<ShouldBe<WrappedMessage>>(data);
-            if (!WebSocketMessenger.isDialogWrapper(wrappedMessage)) {
+            const wrappedMessage = parseJsonSafely(data);
+            if (!WebSocketMessenger.isWrappedMessage(wrappedMessage)) {
                 return; // TODO
             }
             const {dialogId, channel} = wrappedMessage;

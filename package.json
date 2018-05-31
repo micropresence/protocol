@@ -1,6 +1,6 @@
 {
     "name": "@micropresence/protocol",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": "Juri Wiens <juri.wiens@gmail.com>",
     "license": "MIT",
     "main": "build/index.js",
